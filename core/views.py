@@ -8,6 +8,10 @@ from .models import TempData
 
 @method_decorator(csrf_exempt, name='dispatch')
 class PicDataView(View):
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse('GET method ok')
+
     def post(self, request, *args, **kwargs):
         TempData.objects.create(
             chunk_id=self.request.POST.get('id'),
