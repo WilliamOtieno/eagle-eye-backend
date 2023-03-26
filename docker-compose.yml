@@ -58,7 +58,7 @@ services:
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
   db:
-    image: postgres:14
+    image: postgres:14-alpine
     volumes:
       - pgdata:/var/lib/postgresql/data/
     environment:
