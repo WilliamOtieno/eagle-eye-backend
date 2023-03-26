@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+  backend:
+    restart: always
+    build:
+      context: .
+    volumes:
+      - .:/app
+    env_file:
+      - ./.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - redis_data:/data
+
+  celery:
+    restart: always
+    build:
+      context: .
+    command: celery -A EagleEye worker -n master_worker -E --beat --loglevel=debug --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    volumes:
+      - .:/app
+    env_file:
+      - ./.env
+    depends_on:
+      - redis
+      - rabbitmq
+
+  rabbitmq:
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=rabbitmq
+    restart: always
+    image: rabbitmq:3.11.5-management-alpine
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    ports:
+      - "15672:15672"
+
+  nginx:
+    restart: always
+    build:
+      context: ./nginx
+    volumes:
+      - .:/app
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  db:
+    image: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+
+volumes:
+  pgdata:
+  redis_data:
+  rabbitmq_data:

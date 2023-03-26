@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_celery_beat',
+    'django_celery_results',
+
     'core',
 ]
 
@@ -77,8 +80,11 @@ WSGI_APPLICATION = 'EagleEye.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', 'postgres'),
+        'HOST': os.getenv('DB_HOST', 'postgres'),
+        'PORT': os.getenv('DB_PORT', '5432'),
+        'PASSWORD': os.getenv('DB_PASS', 'postgres'),
     }
 }
 
@@ -126,14 +132,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REDIS_CACHE = os.getenv('REDIS_CACHE', 'redis://34.136.45.249:6380/1')
+REDIS_CACHE = os.getenv('REDIS_CACHE', 'redis://34.30.27.231:6380/1')
 
 # CELERY
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
-CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://34.136.45.249:6380/2')
-CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://34.136.45.249:6380/3')
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://34.30.27.231:6380/2')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://34.30.27.231:6380/3')
 CELERY_CACHE_BACKEND = REDIS_CACHE
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'

@@ -15,6 +15,7 @@ django-timezone-field==5.0
 kombu==5.2.4
 Pillow==9.4.0
 prompt-toolkit==3.0.38
+psycopg2-binary==2.9.5
 python-crontab==2.7.1
 python-dateutil==2.8.2
 pytz==2023.2
