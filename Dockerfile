@@ -10,6 +10,6 @@ WORKDIR /app
 COPY . .
 
 RUN pip install -r requirements.txt
-RUN python manage.py migrate
+RUN python manage.py migrate || true
 
 CMD python manage.py runserver 0.0.0.0:$PORT
