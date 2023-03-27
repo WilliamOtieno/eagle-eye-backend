@@ -1,3 +1,4 @@
+import json
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -16,17 +17,14 @@ class PicDataView(View):
         return HttpResponse('GET method ok')
 
     def post(self, request, *args, **kwargs):
-        print('POST Request:......')
-        print(request.POST)
-        print(request.POST.keys())
-        print(request.POST.values())
-        print(request.body)
-        print('POST Request:......')
-        if request.POST.get('id') is not None:
+        d = self.request.body.decode('utf-8')
+        data = json.loads(d)
+        print(data)
+        if data.get('id') is not None:
             TempData.objects.create(
-                chunk_id=self.request.POST.get('id'),
-                index=self.request.POST.get('index'),
-                payload=self.request.POST
+                chunk_id=data.get('id'),
+                index=data.get('index'),
+                payload=data
             )
         else:
             print('Empty Data Received')
