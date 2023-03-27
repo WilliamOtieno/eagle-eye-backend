@@ -4,7 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import TempData
+from .models import TempData, PicData
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -21,11 +21,12 @@ class PicDataView(View):
         data = json.loads(d)
         print(data)
         if data.get('id') is not None:
-            TempData.objects.create(
+            temp = TempData.objects.create(
                 chunk_id=data.get('id'),
                 index=data.get('index'),
                 payload=data
             )
+            PicData.objects.create(chunk_id=temp.chunk_id, chip=temp.chip)
         else:
             print('Empty Data Received')
         return HttpResponse('ok')

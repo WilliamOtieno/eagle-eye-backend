@@ -28,3 +28,7 @@ class TempData(TimestampedModel):
     @property
     def is_last_chunk(self) -> bool:
         return self.payload.get('length') is not None
+
+    @property
+    def chip(self):
+        return self.payload.get('chip')
