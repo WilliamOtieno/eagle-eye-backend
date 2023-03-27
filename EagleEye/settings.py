@@ -153,5 +153,4 @@ CELERY_IGNORE_RESULT = False
 
 CSRF_TRUSTED_ORIGINS = [
     'http://34.29.23.125', 'http://34.29.23.125/',
-    '34.29.23.125', '34.29.23.125/'
 ]
