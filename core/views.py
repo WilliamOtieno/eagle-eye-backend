@@ -10,12 +10,17 @@ from .models import TempData
 class PicDataView(View):
 
     def get(self, request, *args, **kwargs):
+        print('GET Request:......')
+        print(request.GET)
+        print('GET Request:......')
         return HttpResponse('GET method ok')
 
     def post(self, request, *args, **kwargs):
+        print('POST Request:......')
         print(request.POST)
         print(request.POST.keys())
         print(request.POST.values())
+        print('POST Request:......')
         if request.POST.get('id') is not None:
             TempData.objects.create(
                 chunk_id=self.request.POST.get('id'),
