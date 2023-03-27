@@ -17,6 +17,7 @@ class PicData(TimestampedModel):
     batt = models.IntegerField(default=0)
     is_full = models.BooleanField(default=False)
     is_ready = models.BooleanField(default=False)
+    is_processed = models.BooleanField(default=False)
     image = models.ImageField(upload_to='pics/', null=True, blank=True)
 
 

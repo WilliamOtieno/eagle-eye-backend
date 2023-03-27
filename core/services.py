@@ -18,7 +18,7 @@ def resolve_b64_chunks(chunk_id):
 
 def generate_image_from_chunks(chunk_id):
     obj = resolve_b64_chunks(chunk_id)
-    img = Image.open(BytesIO(base64.b64decode(obj.vision)))
+    img = Image.open(BytesIO(base64.b64decode(obj.vision.encode())))
     obj.image = img
     obj.is_ready = True
     obj.save()
