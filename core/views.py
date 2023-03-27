@@ -14,6 +14,8 @@ class PicDataView(View):
 
     def post(self, request, *args, **kwargs):
         print(request.POST)
+        print(request.POST.keys())
+        print(request.POST.values())
         TempData.objects.create(
             chunk_id=self.request.POST.get('id'),
             index=self.request.POST.get('index'),
