@@ -12,7 +12,7 @@ class PicDataView(View):
 
     def get(self, request, *args, **kwargs):
         print('GET Request:......')
-        print(request.GET)
+        print(self.request.GET)
         print('GET Request:......')
         return HttpResponse('GET method ok')
 
