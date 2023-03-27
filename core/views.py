@@ -20,6 +20,7 @@ class PicDataView(View):
         print(request.POST)
         print(request.POST.keys())
         print(request.POST.values())
+        print(request.body)
         print('POST Request:......')
         if request.POST.get('id') is not None:
             TempData.objects.create(
