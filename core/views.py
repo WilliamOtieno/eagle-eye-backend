@@ -13,6 +13,7 @@ class PicDataView(View):
         return HttpResponse('GET method ok')
 
     def post(self, request, *args, **kwargs):
+        print(request.POST)
         TempData.objects.create(
             chunk_id=self.request.POST.get('id'),
             index=self.request.POST.get('index'),
