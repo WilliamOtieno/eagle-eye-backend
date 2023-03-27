@@ -16,9 +16,12 @@ class PicDataView(View):
         print(request.POST)
         print(request.POST.keys())
         print(request.POST.values())
-        TempData.objects.create(
-            chunk_id=self.request.POST.get('id'),
-            index=self.request.POST.get('index'),
-            payload=self.request.POST
-        )
+        if request.POST.get('id') is not None:
+            TempData.objects.create(
+                chunk_id=self.request.POST.get('id'),
+                index=self.request.POST.get('index'),
+                payload=self.request.POST
+            )
+        else:
+            print('Empty Data Received')
         return HttpResponse('ok')
