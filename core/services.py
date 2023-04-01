@@ -10,9 +10,6 @@ def resolve_b64_chunks(chunk_id):
     temps = get_pic_chunks(chunk_id)
     for data in temps:
         pic_object.vision += data.payload['vision']
-        if data.is_last_chunk:
-            pic_object.is_full = True
-            pic_object.is_ready = True
     pic_object.save()
     return pic_object
 

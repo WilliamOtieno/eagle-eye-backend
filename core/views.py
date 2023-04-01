@@ -25,6 +25,7 @@ class PicDataView(View):
             p, _ = PicData.objects.get_or_create(chunk_id=temp.chunk_id, chip=temp.chip)
             if temp.is_last_chunk:
                 p.is_full = True
+                p.is_ready = True
                 p.save()
         else:
             print('Empty Data Received')
