@@ -13,7 +13,6 @@ services:
       - "8000:8000"
     depends_on:
       - redis
-      - db
 
   redis:
     image: redis:alpine
@@ -32,19 +31,6 @@ services:
       - ./.env
     depends_on:
       - redis
-      - rabbitmq
-
-  rabbitmq:
-    container_name: rabbitmq
-    environment:
-      - RABBITMQ_DEFAULT_USER=rabbitmq
-      - RABBITMQ_DEFAULT_PASS=rabbitmq
-    restart: always
-    image: rabbitmq:3.11.5-management-alpine
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
-    ports:
-      - "15672:15672"
 
   nginx:
     restart: always
