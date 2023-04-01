@@ -5,12 +5,14 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import TempData, PicData
+from .tasks import process_payload
 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class PicDataView(View):
 
     def get(self, request, *args, **kwargs):
+        process_payload.delay()
         return HttpResponse('GET method ok')
 
     def post(self, request, *args, **kwargs):
