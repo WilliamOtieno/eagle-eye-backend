@@ -22,7 +22,10 @@ class PicDataView(View):
                 index=data.get('index'),
                 payload=data
             )
-            PicData.objects.get_or_create(chunk_id=temp.chunk_id, chip=temp.chip)
+            p, _ = PicData.objects.get_or_create(chunk_id=temp.chunk_id, chip=temp.chip)
+            if temp.is_last_chunk:
+                p.is_full = True
+                p.save()
         else:
             print('Empty Data Received')
         return HttpResponse('ok')
