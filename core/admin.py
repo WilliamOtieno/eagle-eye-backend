@@ -4,8 +4,8 @@ from .models import PicData, TempData
 
 @admin.register(PicData)
 class PicDataAdmin(admin.ModelAdmin):
-    list_display = ['chunk_id', 'chip', 'is_full', 'is_ready']
-    list_filter = ['chunk_id', 'chip', 'is_full', 'is_ready']
+    list_display = ['chunk_id', 'chip', 'is_full', 'is_ready', 'is_processed']
+    list_filter = ['chunk_id', 'chip', 'is_full', 'is_ready', 'is_processed']
     search_fields = ['chunk_id', 'chip']
 
 
