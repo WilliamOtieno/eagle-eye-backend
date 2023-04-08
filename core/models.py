@@ -10,7 +10,7 @@ class TimestampedModel(models.Model):
 
 
 class PicData(TimestampedModel):
-    chunk_id = models.CharField(max_length=256, null=True, blank=True)
+    pic_id = models.CharField(max_length=256, null=True, blank=True)
     chip = models.CharField(max_length=256, null=True, blank=True)
     vision = models.TextField(null=True, blank=True)
     length = models.BigIntegerField(default=0)
@@ -23,6 +23,7 @@ class PicData(TimestampedModel):
 
 class TempData(TimestampedModel):
     chunk_id = models.CharField(max_length=256, null=True, blank=True)
+    pic_id = models.CharField(max_length=256, null=True, blank=True)
     index = models.IntegerField(default=0)
     payload = models.JSONField(null=True, blank=True)
 
