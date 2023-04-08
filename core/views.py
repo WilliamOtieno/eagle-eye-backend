@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
-
+from django.shortcuts import render
 from .models import TempData, PicData
 from .tasks import process_payload
 
@@ -12,8 +12,9 @@ from .tasks import process_payload
 class PicDataView(View):
 
     def get(self, request, *args, **kwargs):
-        process_payload.delay()
-        return HttpResponse('GET method ok')
+        pics = PicData.objects.all()
+        context = {'pics': pics}
+        return render(self.request, 'core/index.html', context)
 
     def post(self, request, *args, **kwargs):
         d = self.request.body.decode('utf-8')
