@@ -48,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -139,14 +139,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REDIS_CACHE = os.getenv('REDIS_CACHE', 'redis://34.30.27.231:6380/1')
+REDIS_CACHE = os.getenv('REDIS_CACHE', 'redis://redis:6379/1')
 
 # CELERY
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
-CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://34.30.27.231:6380/2')
-CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://34.30.27.231:6380/3')
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://redis:6379/2')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://redis:6379/3')
 CELERY_CACHE_BACKEND = REDIS_CACHE
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
@@ -157,6 +157,13 @@ CELERY_SEND_TASK_SENT_EVENT = True
 CELERY_RESULT_PERSISTENT = True
 CELERY_IGNORE_RESULT = False
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://34.29.23.125', 'http://34.29.23.125/',
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://34.29.23.125', 'http://34.29.23.125/',
+#     'http://127.0.0.1:8000', 'http://127.0.0.1:8000/'
+#     'https://c439-105-163-1-185.ngrok-free.app',
+#     'https://c439-105-163-1-185.ngrok-free.app/',
+#     'http://c439-105-163-1-185.ngrok-free.app',
+#     'http://c439-105-163-1-185.ngrok-free.app/'
+# ]
+# CSRF_COOKIE_NAME = None
+CSRF_USE_SESSIONS = False
