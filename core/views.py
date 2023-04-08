@@ -28,7 +28,7 @@ class PicDataView(View):
                 index=data.get('index'),
                 payload=data
             )
-            p, _ = PicData.objects.get_or_create(pic_id=pic_id, chip=data.get('chip'))
+            p, _ = PicData.objects.get_or_create(pic_id=pic_id)
             if temp.is_last_chunk:
                 p.is_full = True
                 p.is_ready = True
