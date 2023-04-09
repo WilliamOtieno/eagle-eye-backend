@@ -40,7 +40,7 @@
       <div class="card">
         <img src="{{ pic.image.url }}" alt="Photo 1" class="card-img-top">
         <div class="card-body">
-          <h5 class="card-title">ID: {{ pic.pic_id }}</h5>
+          <h5 class="card-title">ID: {{ pic.pic_id|truncatechars:12 }}</h5>
           <p class="card-text"> CHIP: {{ pic.chip }} </p>
           <p class="card-text"> Battery: {{ pic.batt }}% as of {{ pic.updated|timesince }} ago</p>
           <p class="card-text"> Added: {{ pic.created|timesince }} ago</p>
