@@ -12,7 +12,7 @@ from .tasks import process_payload
 class PicDataView(View):
 
     def get(self, request, *args, **kwargs):
-        pics = PicData.objects.all()
+        pics = PicData.objects.filter(is_processed=True)
         context = {'pics': pics}
         return render(self.request, 'core/index.html', context)
 
