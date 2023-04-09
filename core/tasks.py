@@ -8,4 +8,4 @@ from .services import generate_image_from_chunks
 def process_payload():
     data_ = PicData.objects.filter(is_processed=False, is_full=True, is_ready=True)
     for data in data_:
-        generate_image_from_chunks(chunk_id=data.chunk_id)
+        generate_image_from_chunks(pic_id=data.pic_id)

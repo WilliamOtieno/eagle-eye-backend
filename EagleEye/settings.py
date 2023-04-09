@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'django_celery_beat',
     'django_celery_results',
+    'django_serverless_cron',
 
     'core',
 ]
@@ -167,3 +168,12 @@ CELERY_IGNORE_RESULT = False
 # ]
 # CSRF_COOKIE_NAME = None
 CSRF_USE_SESSIONS = False
+
+# SERVERLESS_CRONJOBS = [
+#     (
+#         '2_minutes',
+#         'core.tasks.process_payload',
+#         {}
+#     ),
+
+# ]

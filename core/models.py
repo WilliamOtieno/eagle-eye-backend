@@ -12,7 +12,7 @@ class TimestampedModel(models.Model):
 class PicData(TimestampedModel):
     pic_id = models.CharField(max_length=256, null=True, blank=True)
     chip = models.CharField(max_length=256, null=True, blank=True)
-    vision = models.TextField(null=True, blank=True)
+    vision = models.TextField(default='')
     length = models.BigIntegerField(default=0)
     batt = models.IntegerField(default=0)
     is_full = models.BooleanField(default=False)

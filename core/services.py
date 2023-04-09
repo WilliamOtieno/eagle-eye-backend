@@ -14,8 +14,8 @@ def resolve_b64_chunks(pic_id: str):
     return pic_object
 
 
-def generate_image_from_chunks(chunk_id):
-    obj = resolve_b64_chunks(chunk_id)
+def generate_image_from_chunks(pic_id):
+    obj = resolve_b64_chunks(pic_id)
     parsed_string = requests.utils.unquote(obj.vision)
     img = ContentFile(base64.b64decode(parsed_string), name=f'{get_random_string(16)}.jpg')
     obj.image = img
