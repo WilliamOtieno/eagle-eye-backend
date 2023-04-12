@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -158,16 +158,10 @@ CELERY_SEND_TASK_SENT_EVENT = True
 CELERY_RESULT_PERSISTENT = True
 CELERY_IGNORE_RESULT = False
 
-# CSRF_TRUSTED_ORIGINS = [
-#     'http://34.29.23.125', 'http://34.29.23.125/',
-#     'http://127.0.0.1:8000', 'http://127.0.0.1:8000/'
-#     'https://c439-105-163-1-185.ngrok-free.app',
-#     'https://c439-105-163-1-185.ngrok-free.app/',
-#     'http://c439-105-163-1-185.ngrok-free.app',
-#     'http://c439-105-163-1-185.ngrok-free.app/'
-# ]
-# CSRF_COOKIE_NAME = None
-CSRF_USE_SESSIONS = False
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'https://1943-105-163-2-177.ngrok-free.app'
+]
 
 SERVERLESS_CRONJOBS = [
     (
