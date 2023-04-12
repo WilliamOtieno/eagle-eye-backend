@@ -21,12 +21,13 @@ class PicDataView(View):
         data = json.loads(d)
         chunk_str = data.get('id')
         if chunk_str is not None:
-            temp = TempData.objects.create(
-                chunk_id=chunk_str,
-                pic_id=chunk_str,
-                index=data.get('index'),
-                payload=data
-            )
+            if not TempData.objects.filter(chunk_id=chunk_str, index=data.get('index')).exists():
+                temp = TempData.objects.create(
+                    chunk_id=chunk_str,
+                    pic_id=chunk_str,
+                    index=data.get('index'),
+                    payload=data
+                )
             p, _ = PicData.objects.get_or_create(pic_id=chunk_str)
             if temp.is_last_chunk:
                 p.is_full = True
