@@ -169,11 +169,11 @@ CELERY_IGNORE_RESULT = False
 # CSRF_COOKIE_NAME = None
 CSRF_USE_SESSIONS = False
 
-# SERVERLESS_CRONJOBS = [
-#     (
-#         '2_minutes',
-#         'core.tasks.process_payload',
-#         {}
-#     ),
+SERVERLESS_CRONJOBS = [
+    (
+        '2_minutes',
+        'core.tasks.process_payload',
+        {}
+    ),
 
-# ]
+]

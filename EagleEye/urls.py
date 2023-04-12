@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
+from django_serverless_cron import urls as cron_urls
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('cron/', include(cron_urls)),
     path('', include('core.urls')),
 ]
 
