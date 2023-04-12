@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from .models import TempData, PicData
 from .tasks import process_payload
-
+from django.utils import timezone
 
 @method_decorator(csrf_exempt, name='dispatch')
 class PicDataView(View):
@@ -37,4 +37,8 @@ class PicDataView(View):
                 p.save()
         else:
             print('Empty Data Received')
-        return HttpResponse('ok')
+        now = timezone.now()
+        if now.hour >= 6 and now.hour <= 18:
+            return HttpResponse('good')
+        else:
+            return HttpResponse('wait')
