@@ -162,6 +162,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://1943-105-163-2-177.ngrok-free.app',
     'http://127.0.0.1:8000',
     'https://9a44-105-163-2-130.ngrok-free.app',
+    'http://35.226.222.242',
 ]
 
 SERVERLESS_CRONJOBS = [
