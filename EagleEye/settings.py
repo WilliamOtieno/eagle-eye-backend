@@ -159,8 +159,9 @@ CELERY_RESULT_PERSISTENT = True
 CELERY_IGNORE_RESULT = False
 
 CSRF_TRUSTED_ORIGINS = [
+    'https://1943-105-163-2-177.ngrok-free.app',
     'http://127.0.0.1:8000',
-    'https://1943-105-163-2-177.ngrok-free.app'
+    'https://9a44-105-163-2-130.ngrok-free.app',
 ]
 
 SERVERLESS_CRONJOBS = [
