@@ -5,14 +5,17 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from .models import TempData, PicData
-from .tasks import process_payload
+from .selectors import get_correct_pics
+from .serializers import PicDataSerializer
 from django.utils import timezone
+from rest_framework import generics
+
 
 @method_decorator(csrf_exempt, name='dispatch')
 class PicDataView(View):
 
     def get(self, request, *args, **kwargs):
-        pics = PicData.objects.filter(is_processed=True).order_by('-created')
+        pics = get_correct_pics()
         context = {'pics': pics}
         return render(self.request, 'core/index.html', context)
 
@@ -38,7 +41,12 @@ class PicDataView(View):
         else:
             print('Empty Data Received')
         now = timezone.now()
-        if now.hour >= 6 and now.hour <= 18:
+        if 6 <= now.hour <= 18:
             return HttpResponse('good')
         else:
             return HttpResponse('wait')
+
+
+class PicDataListView(generics.ListAPIView):
+    serializer_class = PicDataSerializer
+    queryset = get_correct_pics()

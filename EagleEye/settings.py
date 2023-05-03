@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django_celery_results',
     'django_serverless_cron',
 
+    'rest_framework',
+
     'core',
 ]
 
@@ -174,3 +176,13 @@ SERVERLESS_CRONJOBS = [
     ),
 
 ]
+
+# DRF
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ]
+}
