@@ -7,3 +7,4 @@ class PicDataSerializer(ModelSerializer):
     class Meta:
         model = PicData
         fields = '__all__'
+        exclude = ['vision']
