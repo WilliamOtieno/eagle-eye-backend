@@ -24,7 +24,7 @@ services:
     restart: always
     build:
       context: .
-    command: celery -A EagleEye worker -n master_worker -E --beat --loglevel=debug --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    command: celery -A EagleEye worker -E --beat --loglevel=debug --scheduler django_celery_beat.schedulers:DatabaseScheduler
     volumes:
       - .:/app
     env_file:
