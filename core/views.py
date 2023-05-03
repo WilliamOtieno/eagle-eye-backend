@@ -21,6 +21,7 @@ class PicDataView(View):
         data = json.loads(d)
         chunk_str = data.get('id')
         if chunk_str is not None:
+            p, _ = PicData.objects.get_or_create(pic_id=chunk_str)
             if not TempData.objects.filter(chunk_id=chunk_str, index=data.get('index')).exists():
                 temp = TempData.objects.create(
                     chunk_id=chunk_str,
@@ -28,13 +29,12 @@ class PicDataView(View):
                     index=data.get('index'),
                     payload=data
                 )
-            p, _ = PicData.objects.get_or_create(pic_id=chunk_str)
-            if temp.is_last_chunk:
-                p.is_full = True
-                p.is_ready = True
-                p.chip = data.get('chip')
-                p.batt = data.get('batt')
-                p.save()
+                if temp.is_last_chunk:
+                    p.is_full = True
+                    p.is_ready = True
+                    p.chip = data.get('chip')
+                    p.batt = data.get('batt')
+                    p.save()
         else:
             print('Empty Data Received')
         now = timezone.now()
